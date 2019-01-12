@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <RuntimeFrameworkVersion>2.1.4</RuntimeFrameworkVersion><!--here is the fix-->
+
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="4.0.1" />
+    <PackageReference Include="BeatPulse.Network" Version="2.1.1" />
+    <PackageReference Include="BeatPulse.NpgSql" Version="2.1.0" />
+    <PackageReference Include="BeatPulse.StatusPageTracker" Version="2.1.0" />
+    <PackageReference Include="BeatPulse.System" Version="2.2.2" />
+    <PackageReference Include="BeatPulse.UI" Version="2.1.2" />
+    <PackageReference Include="CodeHollow.FeedReader" Version="1.1.2" />
+    <PackageReference Include="HerokuPGParser" Version="1.0.2" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="5.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.1" />
+    <PackageReference Include="SpaApiMiddleware" Version="1.0.1" />
+    <PackageReference Include="ZNetCS.AspNetCore.Authentication.Basic" Version="3.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="rakefile">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Worker\Worker.csproj" />
+  </ItemGroup>
+ 
+  <Target Name="MyPreCompileTarget" AfterTargets="Build">
+    <Exec Command="cp rakefile  ../rakefile" />
+  </Target>
+</Project>

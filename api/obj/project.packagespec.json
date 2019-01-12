@@ -1,0 +1,105 @@
+﻿{
+  "version": "1.0.0",
+  "restore": {
+    "projectUniqueName": "/Users/daiot/RiderProjects/jsnoise-core/api/Api.csproj",
+    "projectName": "Api",
+    "projectPath": "/Users/daiot/RiderProjects/jsnoise-core/api/Api.csproj",
+    "outputPath": "/Users/daiot/RiderProjects/jsnoise-core/api/obj/",
+    "projectStyle": "PackageReference",
+    "fallbackFolders": [
+      "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+    ],
+    "originalTargetFrameworks": [
+      "netcoreapp2.1"
+    ],
+    "frameworks": {
+      "netcoreapp2.1": {
+        "projectReferences": {
+          "/Users/daiot/RiderProjects/jsnoise-core/Worker/Worker.csproj": {
+            "projectPath": "/Users/daiot/RiderProjects/jsnoise-core/Worker/Worker.csproj"
+          }
+        }
+      }
+    },
+    "warningProperties": {
+      "warnAsError": [
+        "NU1605"
+      ]
+    }
+  },
+  "frameworks": {
+    "netcoreapp2.1": {
+      "dependencies": {
+        "AutoMapper": {
+          "target": "Package",
+          "version": "[7.0.1, )"
+        },
+        "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+          "target": "Package",
+          "version": "[4.0.1, )"
+        },
+        "BeatPulse.Network": {
+          "target": "Package",
+          "version": "[2.1.1, )"
+        },
+        "BeatPulse.NpgSql": {
+          "target": "Package",
+          "version": "[2.1.0, )"
+        },
+        "BeatPulse.StatusPageTracker": {
+          "target": "Package",
+          "version": "[2.1.0, )"
+        },
+        "BeatPulse.System": {
+          "target": "Package",
+          "version": "[2.2.2, )"
+        },
+        "BeatPulse.UI": {
+          "target": "Package",
+          "version": "[2.1.2, )"
+        },
+        "CodeHollow.FeedReader": {
+          "target": "Package",
+          "version": "[1.1.2, )"
+        },
+        "HerokuPGParser": {
+          "target": "Package",
+          "version": "[1.0.2, )"
+        },
+        "MediatR.Extensions.Microsoft.DependencyInjection": {
+          "target": "Package",
+          "version": "[5.0.2, )"
+        },
+        "Microsoft.AspNetCore.App": {
+          "suppressParent": "All",
+          "target": "Package",
+          "version": "[2.1.1, )",
+          "autoReferenced": true
+        },
+        "Microsoft.NETCore.App": {
+          "suppressParent": "All",
+          "target": "Package",
+          "version": "[2.1.4, )",
+          "autoReferenced": true
+        },
+        "Npgsql.EntityFrameworkCore.PostgreSQL": {
+          "target": "Package",
+          "version": "[2.1.1, )"
+        },
+        "SpaApiMiddleware": {
+          "target": "Package",
+          "version": "[1.0.1, )"
+        },
+        "ZNetCS.AspNetCore.Authentication.Basic": {
+          "target": "Package",
+          "version": "[3.0.0, )"
+        }
+      },
+      "imports": [
+        "net461"
+      ],
+      "assetTargetFallback": true,
+      "warn": true
+    }
+  }
+}
