@@ -132,9 +132,9 @@ namespace CoreJsNoise
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseCors(cfg => cfg.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.UseMvc();
 
-            app.UseCors(cfg => cfg.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 if (serviceScope.ServiceProvider.GetService<PodcastsCtx>() != null)
