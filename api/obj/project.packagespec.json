@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "/Users/daiot/RiderProjects/jsnoise-core/api/Api.csproj",
+    "projectUniqueName": "/Users/daiot/RiderProjects/jsnoise-core/jsnoise-core/backend/api/Api.csproj",
     "projectName": "Api",
-    "projectPath": "/Users/daiot/RiderProjects/jsnoise-core/api/Api.csproj",
-    "outputPath": "/Users/daiot/RiderProjects/jsnoise-core/api/obj/",
+    "projectPath": "/Users/daiot/RiderProjects/jsnoise-core/jsnoise-core/backend/api/Api.csproj",
+    "outputPath": "/Users/daiot/RiderProjects/jsnoise-core/jsnoise-core/backend/api/obj/",
     "projectStyle": "PackageReference",
     "fallbackFolders": [
       "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
@@ -15,8 +15,8 @@
     "frameworks": {
       "netcoreapp2.1": {
         "projectReferences": {
-          "/Users/daiot/RiderProjects/jsnoise-core/Worker/Worker.csproj": {
-            "projectPath": "/Users/daiot/RiderProjects/jsnoise-core/Worker/Worker.csproj"
+          "/Users/daiot/RiderProjects/jsnoise-core/jsnoise-core/backend/Worker/Worker.csproj": {
+            "projectPath": "/Users/daiot/RiderProjects/jsnoise-core/jsnoise-core/backend/Worker/Worker.csproj"
           }
         }
       }
