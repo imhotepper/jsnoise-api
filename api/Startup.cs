@@ -31,6 +31,10 @@ using ZNetCS.AspNetCore.Authentication.Basic.Events;
 using SpaApiMiddleware;
 using BeatPulse.System;
 using BeatPulse.Network;
+using CoreJsNoise.GraphQL;
+using GraphQL;
+using GraphQL.Server;
+using GraphQL.Server.Ui.Playground;
 
 namespace CoreJsNoise
 {
@@ -54,13 +58,13 @@ namespace CoreJsNoise
            
             services.AddDbContext<PodcastsCtx>(options => options.UseNpgsql(conStr));
                                     
-            services.AddBeatPulse(setup =>
-            {
-                setup.AddNpgSql(conStr);
-                setup.AddWorkingSetLiveness(536870912);
+            // services.AddBeatPulse(setup =>
+            // {
+            //     setup.AddNpgSql(conStr);
+            //     setup.AddWorkingSetLiveness(536870912);
               
-            });
-            services.AddBeatPulseUI();
+            // });
+          //  services.AddBeatPulseUI();
 
             services.AddScoped<PodcastsCtx>();
             services.AddScoped<FeedUpdaterService>();
@@ -70,9 +74,20 @@ namespace CoreJsNoise
             services.AddMediatR();
             
             services.AddCors();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+          
+            services.AddScoped<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
+            services.AddScoped<JsNoiseSchema>();
+            services.AddGraphQL(o =>
+            {
+                o.ExposeExceptions = true;
+                
+            }).AddGraphTypes(ServiceLifetime.Scoped)
+                .AddUserContextBuilder(httpContext => httpContext.User)
+               // .AddDataLoader()
+               ;
             
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+  
                services .AddAuthentication(BasicAuthenticationDefaults.AuthenticationScheme)
                 .AddBasicAuthentication(
                     options =>
@@ -119,11 +134,18 @@ namespace CoreJsNoise
             }
 
 
+            app.UseCors(cfg => cfg.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+
+
+            app.UseGraphQL<JsNoiseSchema>();
+            app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
+            
             app.UseSpaApiOnly();
             
             
-            app.UseBeatPulseUI();
+        // TODO: uncomment later   app.UseBeatPulseUI();
 
+        
             
            // app.UseResponseCompression();
         
@@ -132,7 +154,6 @@ namespace CoreJsNoise
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
-            app.UseCors(cfg => cfg.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.UseMvc();
 
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())

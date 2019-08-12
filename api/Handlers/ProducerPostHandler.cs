@@ -8,11 +8,9 @@ using MediatR;
 namespace CoreJsNoise.Handlers
 {
     public class ProducerPostRequest: IRequest<Producer>
-    {
+    { 
         public Producer Producer { get; set; }
     }
-
-
 
     public class ProducerPostHandler : IRequestHandler<ProducerPostRequest, Producer>
     {

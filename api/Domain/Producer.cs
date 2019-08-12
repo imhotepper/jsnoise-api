@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GraphQL.Types;
 
 namespace CoreJsNoise.Domain
 {
