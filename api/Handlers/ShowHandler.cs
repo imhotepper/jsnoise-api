@@ -27,6 +27,7 @@ namespace CoreJsNoise.Handlers
 
             var resp = new ShowDto()
             {
+                Id =  show.Id,
                 Title = show.Title,
                 ProducerId = show.ProducerId,
                 ProducerName = show.Producer.Name,
