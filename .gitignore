@@ -26,6 +26,19 @@ bld/
 [Oo]bj/
 [Ll]og/
 
+api/obj/**
+
+api/[Dd]ebug/
+api/[Dd]ebugPublic/
+api/[Rr]elease/
+api/[Rr]eleases/
+api/x64/
+api/x86/
+api/bld/
+api/[Bb]in/
+api/[Oo]bj/
+api/[Ll]og/
+
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot

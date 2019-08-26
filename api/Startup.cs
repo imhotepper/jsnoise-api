@@ -35,6 +35,7 @@ using CoreJsNoise.GraphQL;
 using GraphQL;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
+using Microsoft.OpenApi.Models;
 
 namespace CoreJsNoise
 {
@@ -87,6 +88,12 @@ namespace CoreJsNoise
                ;
             
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "jsnoise api", Version = "v1" });
+            });
   
                services .AddAuthentication(BasicAuthenticationDefaults.AuthenticationScheme)
                 .AddBasicAuthentication(
@@ -151,6 +158,23 @@ namespace CoreJsNoise
         
             //basic auth
             app.UseAuthentication();
+
+          //  app.UseDefaultFiles();
+           // app.UseStaticFiles();
+            app.UseCors(cfg => cfg.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            
+            
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "public api");
+                c.RoutePrefix = string.Empty;
+
+            });
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
