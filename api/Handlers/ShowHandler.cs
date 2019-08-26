@@ -31,7 +31,8 @@ namespace CoreJsNoise.Handlers
                 ProducerId = show.ProducerId,
                 ProducerName = show.Producer.Name,
                 PublishedDate = show.PublishedDate,
-                Mp3 = show.Mp3
+                Mp3 = show.Mp3,
+                Description = show.Description
             };
             return Task.FromResult(resp);
         }

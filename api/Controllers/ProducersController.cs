@@ -17,6 +17,8 @@ namespace CoreJsNoise.Controllers
 {
     [ApiController]
     [Route("api/[Controller]")]
+    [ApiExplorerSettings(IgnoreApi = true)]
+    
     public partial class ProducersController : ControllerBase
     {
         private IMediator _mediator;
