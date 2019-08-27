@@ -36,9 +36,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Worker\Worker.csproj" />
-  </ItemGroup>
+ 
  
   <Target Name="MyPreCompileTarget" AfterTargets="Build">
     <Exec Command="cp rakefile  ../rakefile" />
