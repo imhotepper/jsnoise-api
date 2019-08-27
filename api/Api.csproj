@@ -16,7 +16,7 @@
     <PackageReference Include="BeatPulse.System" Version="2.2.2" />
     <PackageReference Include="BeatPulse.UI" Version="2.1.2" />
     <PackageReference Include="CodeHollow.FeedReader" Version="1.1.2" />
-    <PackageReference Include="graphiql" Version="1.2.0" />
+    <PackageReference Include="GraphiQL" Version="1.2.0" />
     <PackageReference Include="GraphQL" Version="2.4.0" />
     <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.4.0" />
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.4.0" />
