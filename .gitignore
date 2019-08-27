@@ -11,6 +11,9 @@
 *.userosscache
 *.sln.docstates
 
+.idea
+Worker
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
@@ -26,7 +29,8 @@ bld/
 [Oo]bj/
 [Ll]og/
 
-api/obj/**
+api/obj/
+
 
 api/[Dd]ebug/
 api/[Dd]ebugPublic/

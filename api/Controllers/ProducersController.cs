@@ -30,6 +30,14 @@ namespace CoreJsNoise.Controllers
         {
             return Ok(await _mediator.Send(new ShowsUpdateRequest()));
         }
+        
+        [HttpGet] 
+        [Route("/api/producers/{id}/shows")]
+        [ApiExplorerSettings(IgnoreApi = false)]
+
+        public async Task<ActionResult<ShowsResponse>> GetAll(int id, string q, int? page = 1) =>
+        await _mediator.Send(new ProducerGetAllRequest {ProducerId = id, Query = q, Page = page});
+        
         #region commented
 //        [HttpPost]
 //        [Route("/api/admin/producers")]
@@ -42,11 +50,7 @@ namespace CoreJsNoise.Controllers
 //        }
 //
 //
-//        [HttpGet] 
-//        [Route("/api/producers/{id}/shows")]
-//        public async Task<ActionResult<ShowsResponse>> GetAll(int id, string q, int? page = 1) =>
-//        await _mediator.Send(new ProducerGetAllRequest {ProducerId = id, Query = q, Page = page});
-//        
+//      
 //
 //        [HttpGet]
 //        [Route("/api/admin/producers")]
