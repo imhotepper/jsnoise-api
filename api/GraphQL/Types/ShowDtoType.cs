@@ -10,5 +10,6 @@ public class ShowDtoType: ObjectGraphType<ShowDto>{
             Field(t => t.ProducerName);
             Field(t => t.PublishedDate);
             Field(t => t.ProducerId);
+            Field(t => t.Description);
     }
 }
