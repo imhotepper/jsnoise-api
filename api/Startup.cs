@@ -54,8 +54,21 @@ namespace CoreJsNoise
             var conStr = Configuration.GetConnectionString("DefaultConnection");
             var pgConn = Environment.GetEnvironmentVariable("DATABASE_URL");
 
-            if (!string.IsNullOrWhiteSpace(pgConn))
+            if (!string.IsNullOrWhiteSpace(pgConn)){
                 conStr = HerokuPGParser.ConnectionHelper.BuildExpectedConnectionString(pgConn);
+                
+                  var uri = new Uri(pgConn);            
+                var username = uri.UserInfo.Split(':')[0];
+                var password = uri.UserInfo.Split(':')[1];
+                conStr = 
+                "host=" + uri.Host +
+                "; Database=" + uri.AbsolutePath.Substring(1) +
+                "; Username=" + username +
+                "; Password=" + password + 
+                "; Port=" + uri.Port +
+                "; SSL Mode=Require; Trust Server Certificate=true;";
+                
+            }
            
             services.AddDbContext<PodcastsCtx>(options => options.UseNpgsql(conStr));
                                     
