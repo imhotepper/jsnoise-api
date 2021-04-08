@@ -35,6 +35,7 @@ using CoreJsNoise.GraphQL;
 using GraphQL;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.OpenApi.Models;
 
 namespace CoreJsNoise
@@ -51,6 +52,13 @@ namespace CoreJsNoise
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
+            
+            
             var conStr = Configuration.GetConnectionString("DefaultConnection");
             var pgConn = Environment.GetEnvironmentVariable("DATABASE_URL");
 
@@ -102,6 +110,7 @@ namespace CoreJsNoise
             
             services.AddMvc(o => o.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddHostedService<FeedUpdater>();
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
