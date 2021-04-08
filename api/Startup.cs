@@ -111,7 +111,8 @@ namespace CoreJsNoise
             
             services.AddMvc(o => o.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddHostedService<FeedUpdaterJob>();
+            services.AddHostedService< CoreJsNoise.Jobs.FeedUpdaterJob>();
+          
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
