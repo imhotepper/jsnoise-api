@@ -32,6 +32,7 @@ using SpaApiMiddleware;
 using BeatPulse.System;
 using BeatPulse.Network;
 using CoreJsNoise.GraphQL;
+using CoreJsNoise.Jobs;
 using GraphQL;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
