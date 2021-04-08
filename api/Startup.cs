@@ -6,6 +6,7 @@ using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Api.Jobs;
 using AutoMapper;
 using BeatPulse;
 using BeatPulse.UI;
@@ -111,7 +112,7 @@ namespace CoreJsNoise
             
             services.AddMvc(o => o.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddHostedService< CoreJsNoise.FeedUpdaterJob>();
+            services.AddHostedService< FeedUpdaterJob>();
           
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
