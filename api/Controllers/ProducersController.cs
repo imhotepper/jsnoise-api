@@ -26,7 +26,14 @@ namespace CoreJsNoise.Controllers
 
         [HttpGet]
         [Route("update")]
-        public async Task<ActionResult> Update()
+        public  ActionResult Update()
+        {
+            return Ok();
+        }
+        
+        [HttpGet]
+        [Route("update_jobs")]
+        public async Task<ActionResult> UpdateJobs()
         {
             return Ok(await _mediator.Send(new ShowsUpdateRequest()));
         }
