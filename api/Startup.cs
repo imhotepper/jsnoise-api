@@ -36,6 +36,7 @@ using GraphQL;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
 namespace CoreJsNoise
@@ -110,7 +111,7 @@ namespace CoreJsNoise
             
             services.AddMvc(o => o.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddHostedService< CoreJsNoise.Jobs.FeedUpdaterJob>();
+            services.AddHostedService< CoreJsNoise.FeedUpdaterJob>();
           
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
@@ -156,7 +157,7 @@ namespace CoreJsNoise
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
