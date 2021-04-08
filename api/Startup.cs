@@ -110,7 +110,7 @@ namespace CoreJsNoise
                // .AddDataLoader()
                ;
             
-            services.AddMvc(o => o.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(o => o.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddHostedService< FeedUpdaterJob>();
           
