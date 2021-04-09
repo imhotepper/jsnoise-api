@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 using CodeHollow.FeedReader;
 using CodeHollow.FeedReader.Feeds;
 using CoreJsNoise.Dto;
@@ -11,13 +12,13 @@ namespace CoreJsNoise.Services
 {
     public class RssReader
     {
-        public List<ShowParsedDto> Parse(string rssFeed)
+        public async  Task<List<ShowParsedDto>> ParseAsync(string rssFeed)
         {
-            var itemList = FeedReader.ReadAsync(rssFeed).Result.Items;
+            var feed =  await FeedReader.ReadAsync(rssFeed);
             Console.WriteLine("Parsing : " + rssFeed);
 
             var resp = new List<ShowParsedDto>();
-            foreach (var item in itemList)
+            foreach (var item in feed.Items)
             {
                 if ((!(item.SpecificItem is MediaRssFeedItem) ||
                      !(bool) (item.SpecificItem as MediaRssFeedItem)?.Enclosure?.Url?.Contains(".mp3")) &&

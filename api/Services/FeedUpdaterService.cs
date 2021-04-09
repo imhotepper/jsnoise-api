@@ -21,19 +21,19 @@ namespace CoreJsNoise.Services
             _rssReader = rssReader;
         }
 
-        public void UpdateShows(Producer producer)
+        public async void UpdateShows(Producer producer)
         {
-            var items = GetShows(producer);
-            UpdateShows(producer, items);
+            var items = await GetShowsAsync(producer);
+            UpdateShows(producer,  items);
         }
 
-        public void UpdateAll()
+        public async void UpdateAll()
         {
             var producers = _db.Producers.Where(x => !string.IsNullOrWhiteSpace(x.FeedUrl)).AsNoTracking().ToList();
 
             var toUpdate = new Dictionary<Producer, List<ShowParsedDto>>();
 
-            Parallel.ForEach(producers, (p) => toUpdate.Add(p, GetShows(p)));
+            Parallel.ForEach(producers, async (p) => toUpdate.Add(p, await GetShowsAsync(p)));
 
             foreach (var keyValuePair in toUpdate)
             {
@@ -42,12 +42,12 @@ namespace CoreJsNoise.Services
         }
 
 
-        List<ShowParsedDto> GetShows(Producer producer)
+      async Task< List<ShowParsedDto>> GetShowsAsync(Producer producer)
         {
             var items = new List<ShowParsedDto>();
             try
             {
-                items = _rssReader.Parse(producer.FeedUrl);
+                items = await _rssReader.ParseAsync(producer.FeedUrl);
 
                 Console.WriteLine("---------------------------");
                 Console.WriteLine(producer.Name + " - parsed ok.");
@@ -63,7 +63,7 @@ namespace CoreJsNoise.Services
         }
 
 
-        void UpdateShows(Producer producer, List<ShowParsedDto> items)
+       async void UpdateShows(Producer producer, List<ShowParsedDto> items)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace CoreJsNoise.Services
                     s.ProducerId = producer.Id;
                     if (!_db.Shows.Any(x => x.Title == s.Title)) _db.Shows.Add(s);
                 });
-                _db.SaveChanges();
+                await _db.SaveChangesAsync();
                 Console.WriteLine("---------------------------");
                 Console.WriteLine(producer.Name + "- saved to db!");
                 Console.WriteLine("---------------------------");
