@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
+using Api.Jobs;
 using AutoMapper;
 using CoreJsNoise.Domain;
 using CoreJsNoise.Services;
@@ -201,35 +202,5 @@ namespace CoreJsNoise
         }
     }
     
-    
-    public class FeedUpdaterJob : BackgroundService
-    {
-        private IServiceScopeFactory _factory;
-        private readonly int _interval = 60 * 60_000;
-
-        public FeedUpdaterJob(IServiceScopeFactory factory) // FeedUpdaterService service)
-        {
-            _factory = factory;
-        }
-
-
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-        {
-            while (!stoppingToken.IsCancellationRequested)
-            {
-
-                using (var scope = _factory.CreateScope())
-                {
-                    var fus = scope.ServiceProvider.GetRequiredService<FeedUpdaterService>();
-
-                    fus.UpdateAll();
-
-                }
-
-                Console.WriteLine("Job executed  " + DateTime.Now + " at interval in mili:" + _interval);
-                await Task.Delay(_interval, stoppingToken);
-            }
-        }
-    }
-
+  
 }
