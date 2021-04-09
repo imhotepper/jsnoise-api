@@ -24,7 +24,7 @@ namespace CoreJsNoise.Services
         public async void UpdateShows(Producer producer)
         {
             var items = await GetShowsAsync(producer);
-            UpdateShows(producer,  items);
+            await UpdateShows(producer,  items);
         }
 
         public async void UpdateAll()
@@ -37,7 +37,7 @@ namespace CoreJsNoise.Services
 
             foreach (var keyValuePair in toUpdate)
             {
-                UpdateShows(keyValuePair.Key, keyValuePair.Value);
+              await  UpdateShows(keyValuePair.Key, keyValuePair.Value);
             }
         }
 
@@ -63,7 +63,7 @@ namespace CoreJsNoise.Services
         }
 
 
-       async void UpdateShows(Producer producer, List<ShowParsedDto> items)
+       async Task UpdateShows(Producer producer, List<ShowParsedDto> items)
         {
             try
             {
