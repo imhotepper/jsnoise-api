@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
-using Api.Jobs;
+
 using AutoMapper;
 using CoreJsNoise.Domain;
 using CoreJsNoise.Services;
