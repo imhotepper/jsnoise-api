@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using CoreJsNoise.Domain;
 using CoreJsNoise.Dto;
+using CoreJsNoise.Handlers;
 
 namespace CoreJsNoise.Config
 {
@@ -12,6 +13,10 @@ namespace CoreJsNoise.Config
             CreateMap<List<ShowParsedDto>, List<Show>>();
             CreateMap<Producer, ProducersController.ProducerDto>();
             CreateMap<Show, ShowDto>();
+            CreateMap<ShowsRequest, ShowsResponse>();
+
+
+            //CoreJsNoise.Handlers.ShowsRequest,CoreJsNoise.Dto.ShowsResponse
         }
     }
 }

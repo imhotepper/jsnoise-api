@@ -8,6 +8,13 @@
     </PropertyGroup>
 
     <ItemGroup>
+<!--        <PackageReference Include="GraphQL.Server.All" Version="7.0.0" />-->
+
+                <PackageReference Include="GraphQL" Version="2.4.0" />
+        <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.4.0" />
+        <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.4.0" />
+        
+        
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
         <PackageReference Include="AutoMapper" Version="12.0.0" />
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
@@ -17,13 +24,9 @@
         <PackageReference Include="BeatPulse.System" Version="2.2.2" />
         <PackageReference Include="BeatPulse.UI" Version="2.1.2" />
         <PackageReference Include="CodeHollow.FeedReader" Version="1.1.2" />
-        <PackageReference Include="GraphiQL" Version="1.2.0" />
-        <PackageReference Include="GraphQL" Version="2.4.0" />
-        <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.4.0" />
-        <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.4.0" />
         <PackageReference Include="HerokuPGParser" Version="1.0.2" />
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="5.0.2" />
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.1" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.0" />
         <PackageReference Include="SpaApiMiddleware" Version="1.0.1" />
 <!--        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc2" />-->
         <PackageReference Include="ZNetCS.AspNetCore.Authentication.Basic" Version="3.0.0" />

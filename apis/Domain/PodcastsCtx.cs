@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace CoreJsNoise.Domain
 {
@@ -20,5 +21,19 @@ namespace CoreJsNoise.Domain
                 .HasIndex(i => i.ProducerId);
         }
         
+    }
+    
+    
+    public class PodcastsCtxFactory : IDesignTimeDbContextFactory<PodcastsCtx>
+    {
+        public PodcastsCtx CreateDbContext(string[] args)
+        {
+            var connStr = Environment.GetEnvironmentVariable("DATABASE_URL")??
+                          "User ID=postgres;Password=;Server=localhost;Port=5432;Database=podcasts-db2;Integrated Security=true;Pooling=true;";
+            var optionsBuilder = new DbContextOptionsBuilder<PodcastsCtx>();
+            optionsBuilder.UseNpgsql(connStr);
+
+            return new PodcastsCtx(optionsBuilder.Options);
+        }
     }
 }

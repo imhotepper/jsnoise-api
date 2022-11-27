@@ -4,8 +4,8 @@ using CoreJsNoise.GraphQL;
 using CoreJsNoise.Services;
 using GraphQL;
 using GraphQL.Server;
-using GraphQL.Server.Ui.Playground;
-using Microsoft.AspNetCore.Mvc;
+// using GraphQL.Server.Ui.Playground;
+// using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using SpaApiMiddleware;
@@ -16,12 +16,20 @@ using MediatR;
 using AutoMapper;
 using CoreJsNoise.Config;
 using CoreJsNoise.Handlers;
+using GraphQL.Server.Ui.Playground;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.Configure<KestrelServerOptions>(options =>
+{
+    options.AllowSynchronousIO = true;
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 // builder.Services.AddEndpointsApiExplorer();
 // builder.Services.AddSwaggerGen();
@@ -68,12 +76,16 @@ builder.Services.AddCors();
           
 builder.Services.AddScoped<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
 builder.Services.AddScoped<JsNoiseSchema>();
+builder.Services.AddGraphQL().AddGraphTypes(ServiceLifetime.Scoped);
 builder.Services.AddGraphQL(o =>
             {
                 o.ExposeExceptions = true;
                 
-            }).AddGraphTypes(ServiceLifetime.Scoped)
-                .AddUserContextBuilder(httpContext => httpContext.User)
+            })
+    
+    .AddGraphTypes(ServiceLifetime.Scoped)
+    
+                // .AddUserContextBuilder(httpContext => httpContext.User)
                // .AddDataLoader()
                ;
             
@@ -128,7 +140,8 @@ app.UseCors(cfg => cfg.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
 
 app.UseGraphQL<JsNoiseSchema>();
-app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
+
+app.UseGraphQLPlayground(new GraphQLPlaygroundOptions{GraphQLEndPoint = "/graphql", Path = "/ui/playground"});
             
 app.UseSpaApiOnly();
             
