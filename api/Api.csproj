@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>9</LangVersion>
     <!-- <RuntimeFrameworkVersion>2.1.4</RuntimeFrameworkVersion> -->
     <!--here is the fix-->
 
@@ -23,23 +24,19 @@
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.4.0" />
     <PackageReference Include="HerokuPGParser" Version="1.0.2" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="5.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.App">
-      <PrivateAssets Condition="'%(PackageReference.Version)' == ''">all</PrivateAssets>
-      <Publish Condition="'%(PackageReference.Version)' == ''">true</Publish>
-    </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.1" />
     <PackageReference Include="SpaApiMiddleware" Version="1.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc2" />
     <PackageReference Include="ZNetCS.AspNetCore.Authentication.Basic" Version="3.0.0" />
   </ItemGroup>
-  <ItemGroup>
-    <None Update="rakefile">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
- 
- 
-  <Target Name="MyPreCompileTarget" AfterTargets="Build">
-    <Exec Command="cp rakefile  ../rakefile" />
-  </Target>
+<!--  <ItemGroup>-->
+<!--    <None Update="rakefile">-->
+<!--      <CopyToOutputDirectory>Always</CopyToOutputDirectory>-->
+<!--    </None>-->
+<!--  </ItemGroup>-->
+<!-- -->
+<!-- -->
+<!--  <Target Name="MyPreCompileTarget" AfterTargets="Build">-->
+<!--    <Exec Command="cp rakefile  ../rakefile" />-->
+<!--  </Target>-->
 </Project>
