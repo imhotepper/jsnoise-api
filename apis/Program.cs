@@ -17,6 +17,7 @@ using AutoMapper;
 using CoreJsNoise.Config;
 using CoreJsNoise.Handlers;
 using GraphQL.Server.Ui.Playground;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,15 +26,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.Configure<KestrelServerOptions>(options =>
-{
-    options.AllowSynchronousIO = true;
-});
-
-builder.Services.Configure<IISServerOptions>(options =>
-{
-    options.AllowSynchronousIO = true;
-});
+// builder.Services.Configure<KestrelServerOptions>(options =>
+// {
+//     options.AllowSynchronousIO = true;
+// });
+//
+// builder.Services.Configure<IISServerOptions>(options =>
+// {
+//     options.AllowSynchronousIO = true;
+// });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 // builder.Services.AddEndpointsApiExplorer();
@@ -138,6 +139,15 @@ builder.Services .AddAuthentication(BasicAuthenticationDefaults.AuthenticationSc
 
 var app = builder.Build();
 
+
+app.Use(async (context, next) =>
+{
+    var syncIOFeature = context.Features.Get<IHttpBodyControlFeature>();
+    if (syncIOFeature != null)
+        syncIOFeature.AllowSynchronousIO = true;
+    
+    await next.Invoke();
+});
 
 app.UseCors(cfg => cfg.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
