@@ -30,6 +30,11 @@ builder.Services.Configure<KestrelServerOptions>(options =>
     options.AllowSynchronousIO = true;
 });
 
+builder.Services.Configure<IISServerOptions>(options =>
+{
+    options.AllowSynchronousIO = true;
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 // builder.Services.AddEndpointsApiExplorer();
 // builder.Services.AddSwaggerGen();
@@ -82,10 +87,8 @@ builder.Services.AddGraphQL(o =>
                 o.ExposeExceptions = true;
                 
             })
-    
-    .AddGraphTypes(ServiceLifetime.Scoped)
-    
-                // .AddUserContextBuilder(httpContext => httpContext.User)
+            .AddGraphTypes(ServiceLifetime.Scoped)
+            .AddUserContextBuilder(httpContext => httpContext.User)
                // .AddDataLoader()
                ;
             
